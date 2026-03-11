@@ -45,7 +45,7 @@ export default function HoursMapSection() {
           </div>
           <div className="map-card">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.3!2d9.205!3d45.455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sFarmacia+Mozart!5e0!3m2!1sit!2sit!4v1"
+              src="https://www.google.com/maps?q=Farmacia+Mozart,+Via+Wolfgang+Amadeus+Mozart+41,+20096+Pioltello+MI&z=17&output=embed"
               title="Mappa Farmacia Mozart - Via Mozart, Pioltello"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

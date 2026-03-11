@@ -27,7 +27,7 @@ export default function ContactSection() {
             <p>02 9214 0862</p>
           </a>
           <a
-            href="https://maps.google.com/?q=Farmacia+Mozart+Via+Mozart+41+Pioltello"
+            href="https://www.google.com/maps/search/Farmacia+Mozart,+Via+Wolfgang+Amadeus+Mozart+41,+20096+Pioltello+MI"
             className="contact-card"
             target="_blank"
             rel="noopener noreferrer"
