@@ -25,7 +25,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.farmaciamozart.it'),
+  metadataBase: new URL('https://www.farmaciamozart.com'),
   title: {
     default: 'Farmacia Mozart | Farmacia a Pioltello — Salute, Benessere e Cosmetica',
     template: '%s | Farmacia Mozart Pioltello',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     description: 'Da oltre 30 anni il punto di riferimento per salute, benessere e cosmetica a Pioltello. Farmaci, cosmetica naturale, veterinaria e consulenza.',
     type: 'website',
     locale: 'it_IT',
-    url: 'https://www.farmaciamozart.it',
+    url: 'https://www.farmaciamozart.com',
     siteName: 'Farmacia Mozart',
     images: [
       {

@@ -4,9 +4,9 @@ export default function JsonLd() {
     '@type': 'Pharmacy',
     name: 'Farmacia Mozart',
     alternateName: 'Farmacia Mozart Pioltello',
-    url: 'https://www.farmaciamozart.it',
-    logo: 'https://www.farmaciamozart.it/img/logo.png',
-    image: 'https://www.farmaciamozart.it/img/logo.png',
+    url: 'https://www.farmaciamozart.com',
+    logo: 'https://www.farmaciamozart.com/img/logo.png',
+    image: 'https://www.farmaciamozart.com/img/logo.png',
     telephone: '+390292140862',
     email: 'farmamozart@gmail.com',
     description:
@@ -58,9 +58,9 @@ export default function JsonLd() {
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': 'https://www.farmaciamozart.it/#business',
+    '@id': 'https://www.farmaciamozart.com/#business',
     name: 'Farmacia Mozart',
-    url: 'https://www.farmaciamozart.it',
+    url: 'https://www.farmaciamozart.com',
     telephone: '+390292140862',
     address: {
       '@type': 'PostalAddress',
@@ -76,10 +76,10 @@ export default function JsonLd() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Farmacia Mozart',
-    url: 'https://www.farmaciamozart.it',
+    url: 'https://www.farmaciamozart.com',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://www.farmaciamozart.it/?q={search_term_string}',
+      target: 'https://www.farmaciamozart.com/?q={search_term_string}',
       'query-input': 'required name=search_term_string',
     },
   };
