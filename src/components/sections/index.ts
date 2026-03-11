@@ -1,0 +1,9 @@
+export { default as HeroSection } from './HeroSection';
+export { default as ServicesGrid } from './ServicesGrid';
+export { default as OffersSection } from './OffersSection';
+export { default as CatalogSection } from './CatalogSection';
+export { default as WhyUsSection } from './WhyUsSection';
+export { default as FAQSection } from './FAQSection';
+export { default as ReviewsSection } from './ReviewsSection';
+export { default as HoursMapSection } from './HoursMapSection';
+export { default as ContactSection } from './ContactSection';
