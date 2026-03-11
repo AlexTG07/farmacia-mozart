@@ -1,8 +1,7 @@
 import type { NextConfig } from 'next';
 
-const securityHeaders = [
+const baseSecurityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
-  { key: 'X-Frame-Options', value: 'DENY' },
   { key: 'X-XSS-Protection', value: '1; mode=block' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self)' },
@@ -12,7 +11,34 @@ const securityHeaders = [
   },
 ];
 
+const mainCsp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' cdn.sanity.io data:",
+  "font-src 'self'",
+  "frame-src www.google.com",
+  "connect-src 'self' *.sanity.io",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join('; ');
+
+const studioCsp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' core.sanity-cdn.com",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' cdn.sanity.io data: blob:",
+  "font-src 'self' data:",
+  "frame-src 'self'",
+  "connect-src 'self' *.sanity.io *.api.sanity.io",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join('; ');
+
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'cdn.sanity.io' },
@@ -23,12 +49,18 @@ const nextConfig: NextConfig = {
       {
         source: '/studio/:path*',
         headers: [
+          ...baseSecurityHeaders,
           { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Content-Security-Policy', value: studioCsp },
         ],
       },
       {
         source: '/((?!studio).*)',
-        headers: securityHeaders,
+        headers: [
+          ...baseSecurityHeaders,
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'Content-Security-Policy', value: mainCsp },
+        ],
       },
     ];
   },
