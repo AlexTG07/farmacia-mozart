@@ -79,7 +79,7 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p>
-            &copy; {year} Farmacia Mozart — P.IVA 12345678901 —{' '}
+            &copy; {year} Farmacia Mozart —{' '}
             <button className="policy-link" onClick={() => setPolicy('privacy')}>Privacy Policy</button> ·{' '}
             <button className="policy-link" onClick={() => setPolicy('cookie')}>Cookie Policy</button>
           </p>
