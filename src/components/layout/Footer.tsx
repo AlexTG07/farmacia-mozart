@@ -1,7 +1,14 @@
-import Link from 'next/link';
+'use client';
+
+import { useState, useCallback } from 'react';
+import PolicyModal from '@/components/ui/PolicyModal';
+
+type PolicyType = 'privacy' | 'cookie' | null;
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const [policy, setPolicy] = useState<PolicyType>(null);
+  const closePolicy = useCallback(() => setPolicy(null), []);
 
   return (
     <footer className="footer">
@@ -73,11 +80,13 @@ export default function Footer() {
         <div className="footer-bottom">
           <p>
             &copy; {year} Farmacia Mozart — P.IVA 12345678901 —{' '}
-            <Link href="/privacy">Privacy Policy</Link> ·{' '}
-            <Link href="/cookie-policy">Cookie Policy</Link>
+            <button className="policy-link" onClick={() => setPolicy('privacy')}>Privacy Policy</button> ·{' '}
+            <button className="policy-link" onClick={() => setPolicy('cookie')}>Cookie Policy</button>
           </p>
         </div>
       </div>
+
+      <PolicyModal type={policy} onClose={closePolicy} />
     </footer>
   );
 }

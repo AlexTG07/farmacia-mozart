@@ -1,13 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
+import PolicyModal from '@/components/ui/PolicyModal';
 import type { CookieConsent } from '@/types';
+
+type PolicyType = 'privacy' | 'cookie' | null;
 
 const STORAGE_KEY = 'fm-cookie-consent';
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
+  const [policy, setPolicy] = useState<PolicyType>(null);
+  const closePolicy = useCallback(() => setPolicy(null), []);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -41,7 +45,7 @@ export default function CookieBanner() {
           <p>
             Usiamo cookie tecnici necessari e, con il tuo consenso,
             cookie analitici per migliorare il servizio.{' '}
-            <Link href="/cookie-policy">Scopri di più</Link>
+            <button className="policy-link" onClick={() => setPolicy('cookie')}>Scopri di più</button>
           </p>
         </div>
         <div className="cookie-actions">
@@ -53,6 +57,7 @@ export default function CookieBanner() {
           </button>
         </div>
       </div>
+      <PolicyModal type={policy} onClose={closePolicy} />
     </div>
   );
 }
