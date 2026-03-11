@@ -13,12 +13,12 @@ const baseSecurityHeaders = [
 
 const mainCsp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' va.vercel-scripts.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' cdn.sanity.io data:",
   "font-src 'self'",
   "frame-src www.google.com",
-  "connect-src 'self' *.sanity.io",
+  "connect-src 'self' *.sanity.io vitals.vercel-insights.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
