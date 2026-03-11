@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Inter } from 'next/font/google';
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 import { TopBar } from '@/components/layout';
 import { Header } from '@/components/layout';
@@ -116,6 +117,7 @@ export default async function RootLayout({
         <ScrollToTop />
         <CookieBanner />
         <GoogleTranslateInit />
+        <Analytics />
       </body>
     </html>
   );
