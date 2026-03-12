@@ -1,24 +1,8 @@
-'use client';
-
-import { useState, useMemo } from 'react';
 import SectionHeader from '../ui/SectionHeader';
-import FilterChip from '../ui/FilterChip';
 import Badge from '../ui/Badge';
-import type { Product, Category } from '@/types';
+import type { Product, Category, Offer } from '@/types';
 import { sanitizeText, sanitizePrice } from '@/lib/security/sanitize';
 import { urlFor } from '@/lib/sanity/client';
-
-const MAX_SEARCH_LEN = 100;
-
-/** Normalizza una stringa per confronto: lowercase, rimuove accenti e tag HTML */
-function normalize(str: string): string {
-  return str
-    .replace(/<[^>]*>/g, '')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
-    .trim();
-}
 
 interface CatalogSectionProps {
   products?: Product[];
@@ -26,34 +10,7 @@ interface CatalogSectionProps {
   offers?: Offer[];
 }
 
-export default function CatalogSection({ products = [], categories = [] }: CatalogSectionProps) {
-  const cats: Category[] = [{ _id: 'all', name: 'Tutti', slug: 'tutti' }, ...categories];
-  const [active, setActive] = useState('all');
-  const [search, setSearch] = useState('');
-
-  const handleSearch = (value: string) => {
-    // Limita lunghezza e rimuove tag HTML
-    const clean = value.replace(/<[^>]*>/g, '').slice(0, MAX_SEARCH_LEN);
-    setSearch(clean);
-  };
-
-  const filtered = useMemo(() => {
-    let result = active === 'all'
-      ? products
-      : products.filter(p => p.categorySlug === active);
-
-    const q = normalize(search);
-    if (q.length > 0) {
-      result = result.filter(p =>
-        normalize(p.name).includes(q) ||
-        (p.description && normalize(p.description).includes(q)) ||
-        (p.category?.name && normalize(p.category.name).includes(q))
-      );
-    }
-
-    return result;
-  }, [products, active, search]);
-
+export default function CatalogSection({ products = [], offers = [] }: CatalogSectionProps) {
   if (products.length === 0) return null;
 
   return (
@@ -64,49 +21,11 @@ export default function CatalogSection({ products = [], categories = [] }: Catal
           badgeVariant="gold"
           badgeIcon={<span aria-hidden="true">📋</span>}
           title="I nostri prodotti"
-          description="Sfoglia le nostre categorie e trova ciò che cerchi."
+          description="Tutti i prodotti disponibili."
         />
-        <div className="catalog-search">
-          <svg className="catalog-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-          </svg>
-          <input
-            type="text"
-            className="catalog-search-input"
-            placeholder="Cerca un prodotto..."
-            value={search}
-            onChange={e => handleSearch(e.target.value)}
-            maxLength={MAX_SEARCH_LEN}
-            autoComplete="off"
-            spellCheck={false}
-          />
-          {search && (
-            <button
-              className="catalog-search-clear"
-              onClick={() => setSearch('')}
-              aria-label="Cancella ricerca"
-              type="button"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M18 6 6 18M6 6l12 12"/>
-              </svg>
-            </button>
-          )}
-        </div>
-        <div className="catalog-filters">
-          {cats.map(cat => (
-            <FilterChip
-              key={cat._id}
-              label={cat.name}
-              active={active === (cat.slug === 'tutti' ? 'all' : cat.slug)}
-              onClick={() => setActive(cat.slug === 'tutti' ? 'all' : cat.slug)}
-            />
-          ))}
-        </div>
         <div className="catalog-grid">
-          {filtered.length > 0 ? (
-            filtered.map(product => {
-              // Cerca offerta attiva collegata (match per id prodotto)
+          {products.length > 0 ? (
+            products.map(product => {
               const offer = offers?.find(o => o.product && o.product.name === product.name);
               const hasOffer = !!offer;
               const price = hasOffer ? offer.discountedPrice : product.price;
@@ -160,7 +79,7 @@ export default function CatalogSection({ products = [], categories = [] }: Catal
             })
           ) : (
             <div className="empty-state">
-              <p>Nessun prodotto trovato{search ? ` per "${sanitizeText(search)}"` : ' in questa categoria'}.</p>
+              <p>Nessun prodotto disponibile.</p>
             </div>
           )}
         </div>
