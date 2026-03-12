@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 
 const ALL_NAV_ITEMS = [
   { href: '#servizi', label: 'Servizi', key: 'servizi' },
   { href: '#offerte', label: 'Offerte', key: 'offerte' },
+  { href: '#volantini', label: 'Volantini', key: 'volantini' },
   { href: '#catalogo', label: 'Catalogo', key: 'catalogo' },
+  { href: '#galleria', label: 'Galleria', key: 'galleria' },
   { href: '#faq', label: 'FAQ', key: 'faq' },
   { href: '#orari', label: 'Orari', key: 'orari' },
   { href: '#contatti', label: 'Contatti', key: 'contatti' },
@@ -15,15 +17,18 @@ const ALL_NAV_ITEMS = [
 interface HeaderProps {
   hasOffers?: boolean;
   hasProducts?: boolean;
+  hasFlyers?: boolean;
 }
 
-export default function Header({ hasOffers = false, hasProducts = false }: HeaderProps) {
+export default function Header({ hasOffers = false, hasProducts = false, hasFlyers = false }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   const navItems = ALL_NAV_ITEMS.filter(item => {
     if (item.key === 'offerte' && !hasOffers) return false;
     if (item.key === 'catalogo' && !hasProducts) return false;
+    if (item.key === 'volantini' && !hasFlyers) return false;
     return true;
   });
 
@@ -33,12 +38,43 @@ export default function Header({ hasOffers = false, hasProducts = false }: Heade
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const sectionIds = navItems.map(item => item.key);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+    );
+
+    const elements: Element[] = [];
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el) {
+        observer.observe(el);
+        elements.push(el);
+      }
+    }
+
+    return () => {
+      for (const el of elements) observer.unobserve(el);
+    };
+  }, [navItems]);
+
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} role="navigation" aria-label="Navigazione principale">
       <div className="container">
-        <Link href="/" className="logo">
-          <img src="/img/logo.png" alt="Farmacia Mozart" width={140} height={40} style={{ objectFit: 'contain' }} />
-        </Link>
+        <a
+          href="#"
+          className="logo"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setActiveSection(''); }}
+        >
+          <Image src="/img/logo.png" alt="Farmacia Mozart" width={320} height={100} quality={90} priority style={{ objectFit: 'contain' }} />
+        </a>
 
         <button
           className="hamburger"
@@ -54,13 +90,14 @@ export default function Header({ hasOffers = false, hasProducts = false }: Heade
             <a
               key={item.href}
               href={item.href}
+              className={activeSection === item.key ? 'active' : ''}
               onClick={() => setMenuOpen(false)}
             >
               {item.label}
             </a>
           ))}
           <a
-            href="https://wa.me/393271262504"
+            href="https://wa.me/390292140862"
             className="btn-cta"
             target="_blank"
             rel="noopener noreferrer"

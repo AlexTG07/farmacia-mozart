@@ -37,6 +37,8 @@ export interface Offer {
   badge?: string;
   active: boolean;
   order?: number;
+  startDate?: string;
+  endDate?: string;
 }
 
 export interface Product {
@@ -88,6 +90,16 @@ export interface SanityImage {
     _type: 'reference';
   };
   alt?: string;
+}
+
+export interface Flyer {
+  _id: string;
+  title: string;
+  image?: SanityImage;
+  startDate?: string;
+  endDate?: string;
+  active: boolean;
+  order?: number;
 }
 
 export interface CookieConsent {

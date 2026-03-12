@@ -1,6 +1,11 @@
 import Button from '../ui/Button';
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  rating: number;
+  totalReviews: number;
+}
+
+export default function HeroSection({ rating, totalReviews }: HeroSectionProps) {
   return (
     <section className="hero" id="hero">
       <div className="container">
@@ -17,7 +22,7 @@ export default function HeroSection() {
           <div className="hero-buttons">
             <Button
               variant="whatsapp"
-              href="https://wa.me/393271262504"
+              href="https://wa.me/390292140862"
               target="_blank"
               rel="noopener noreferrer"
               icon={
@@ -52,8 +57,8 @@ export default function HeroSection() {
           </div>
           <div className="hero-card">
             <i>⭐</i>
-            <h3>4.3 / 5</h3>
-            <p>Su Google Reviews</p>
+            <h3>{rating} / 5</h3>
+            <p>{totalReviews}+ Google Reviews</p>
           </div>
         </div>
       </div>

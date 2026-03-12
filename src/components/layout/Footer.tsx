@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import Image from 'next/image';
 import PolicyModal from '@/components/ui/PolicyModal';
 
 type PolicyType = 'privacy' | 'cookie' | null;
@@ -10,6 +11,11 @@ export default function Footer() {
   const [policy, setPolicy] = useState<PolicyType>(null);
   const closePolicy = useCallback(() => setPolicy(null), []);
 
+  const handleResetCookies = useCallback(() => {
+    localStorage.removeItem('fm-cookie-consent');
+    window.location.reload();
+  }, []);
+
   return (
     <footer className="footer">
       <div className="container">
@@ -17,20 +23,12 @@ export default function Footer() {
           {/* About */}
           <div className="footer-about">
             <div className="logo">
-              <img src="/img/logo.png" alt="Farmacia Mozart" width={140} height={40} style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+              <Image src="/img/logo.png" alt="Farmacia Mozart" width={320} height={100} quality={90} style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
             </div>
             <p>
               Da oltre 30 anni un punto di riferimento nel quartiere.
               Salute, benessere e cosmetica con la competenza che meriti.
             </p>
-            <div className="footer-social">
-              <a href="https://www.facebook.com/farmaciamozart" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" /></svg>
-              </a>
-              <a href="https://www.instagram.com/farmaciamozart" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5" /><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" /><circle cx="17.5" cy="6.5" r="1.5" /></svg>
-              </a>
-            </div>
           </div>
 
           {/* Links */}
@@ -40,6 +38,7 @@ export default function Footer() {
               <li><a href="#servizi">Servizi</a></li>
               <li><a href="#offerte">Offerte</a></li>
               <li><a href="#catalogo">Catalogo</a></li>
+              <li><a href="#galleria">Galleria</a></li>
               <li><a href="#faq">FAQ</a></li>
               <li><a href="#contatti">Contatti</a></li>
             </ul>
@@ -67,7 +66,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/393271262504" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/390292140862" target="_blank" rel="noopener noreferrer">
                   WhatsApp
                 </a>
               </li>
@@ -81,7 +80,8 @@ export default function Footer() {
           <p>
             &copy; {year} Farmacia Mozart —{' '}
             <button className="policy-link" onClick={() => setPolicy('privacy')}>Privacy Policy</button> ·{' '}
-            <button className="policy-link" onClick={() => setPolicy('cookie')}>Cookie Policy</button>
+            <button className="policy-link" onClick={() => setPolicy('cookie')}>Cookie Policy</button> ·{' '}
+            <button className="policy-link" onClick={handleResetCookies}>Gestisci Cookie</button>
           </p>
         </div>
       </div>

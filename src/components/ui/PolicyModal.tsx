@@ -50,12 +50,12 @@ function PrivacyContent() {
   return (
     <>
       <h2>Privacy Policy</h2>
-      <p className="policy-date">Ultimo aggiornamento: Gennaio 2025</p>
+      <p className="policy-date">Ultimo aggiornamento: Marzo 2026</p>
 
       <h3>1. Titolare del Trattamento</h3>
       <p>
         Farmacia Mozart — Via Mozart 41, 20096 Pioltello (MI).
-        Email: <a href="mailto:farmamozart@gmail.com">farmamozart@gmail.com</a>
+        Email: <a href="mailto:farmaciamozart@gmail.com">farmaciamozart@gmail.com</a>
       </p>
 
       <h3>2. Dati Raccolti</h3>
@@ -82,7 +82,7 @@ function PrivacyContent() {
       <p>
         Hai diritto di accesso, rettifica, cancellazione, portabilità dei tuoi dati
         e di revocare il consenso in qualsiasi momento. Per esercitare i tuoi diritti,
-        contattaci a <a href="mailto:farmamozart@gmail.com">farmamozart@gmail.com</a>.
+        contattaci a <a href="mailto:farmaciamozart@gmail.com">farmaciamozart@gmail.com</a>.
       </p>
     </>
   );
@@ -92,7 +92,7 @@ function CookieContent() {
   return (
     <>
       <h2>Cookie Policy</h2>
-      <p className="policy-date">Ultimo aggiornamento: Gennaio 2025</p>
+      <p className="policy-date">Ultimo aggiornamento: Marzo 2026</p>
 
       <h3>1. Cosa sono i Cookie</h3>
       <p>
@@ -131,7 +131,7 @@ function CookieContent() {
       <h3>6. Contatti</h3>
       <p>
         Per domande sulla nostra Cookie Policy, contattaci a{' '}
-        <a href="mailto:farmamozart@gmail.com">farmamozart@gmail.com</a>.
+        <a href="mailto:farmaciamozart@gmail.com">farmaciamozart@gmail.com</a>.
       </p>
     </>
   );

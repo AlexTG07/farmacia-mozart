@@ -1,4 +1,4 @@
-export default function JsonLd() {
+ export default function JsonLd() {
   const pharmacySchema = {
     '@context': 'https://schema.org',
     '@type': 'Pharmacy',
@@ -8,7 +8,7 @@ export default function JsonLd() {
     logo: 'https://www.farmaciamozart.com/img/logo.png',
     image: 'https://www.farmaciamozart.com/img/logo.png',
     telephone: '+390292140862',
-    email: 'farmamozart@gmail.com',
+    email: 'farmaciamozart@gmail.com',
     description:
       'Farmacia Mozart a Pioltello: farmaci con e senza ricetta, cosmetica naturale e biologica, prodotti veterinari, integratori e consulenza personalizzata.',
     address: {
@@ -48,10 +48,7 @@ export default function JsonLd() {
     priceRange: '€€',
     currenciesAccepted: 'EUR',
     paymentAccepted: 'Cash, Credit Card, Debit Card',
-    sameAs: [
-      'https://www.facebook.com/farmaciamozart',
-      'https://www.instagram.com/farmaciamozart',
-    ],
+    sameAs: [],
     hasMap: 'https://www.google.com/maps/search/Farmacia+Mozart,+Via+Wolfgang+Amadeus+Mozart+41,+20096+Pioltello+MI',
   };
 

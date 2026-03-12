@@ -5,11 +5,11 @@ import type { FAQ } from '@/types';
 const DEFAULT_FAQS: FAQ[] = [
   {
     _id: '1', question: 'Quali sono gli orari di apertura?',
-    answer: 'Siamo aperti dal lunedì al venerdì dalle 8:30 alle 19:30 e il sabato dalle 9:00 alle 13:00. La domenica siamo chiusi.',
+    answer: 'Siamo aperti dal lunedì al sabato dalle 8:00 alle 20:30 e la domenica dalle 9:00 alle 20:00. Aperti 365 giorni all\'anno.',
   },
   {
     _id: '2', question: 'Posso contattarvi su WhatsApp?',
-    answer: 'Sì! È il modo più rapido per raggiungerci. Scrivici al 327 126 2504 per informazioni, disponibilità farmaci o qualsiasi domanda.',
+    answer: 'Sì! È il modo più rapido per raggiungerci. Scrivici al 02 9214 0862 per informazioni, disponibilità farmaci o qualsiasi domanda.',
   },
   {
     _id: '3', question: 'Fate consegne a domicilio?',

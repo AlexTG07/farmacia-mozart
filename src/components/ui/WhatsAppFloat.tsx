@@ -12,7 +12,7 @@ export default function WhatsAppFloat() {
 
   if (!visible) return null;
 
-  const phone = '393271262504';
+  const phone = '390292140862';
   const msg = encodeURIComponent('Ciao! Vorrei informazioni sulla farmacia.');
 
   return (

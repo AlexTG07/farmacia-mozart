@@ -3,7 +3,7 @@
 // ============================================
 
 import { sanityClient } from './client';
-import type { Offer, Product, Category, FAQ, Service, SiteSettings } from '@/types';
+import type { Offer, Product, Category, FAQ, Service, SiteSettings, Flyer } from '@/types';
 
 export async function getSiteSettings(): Promise<SiteSettings> {
   return sanityClient.fetch(
@@ -24,7 +24,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 export async function getOffers(): Promise<Offer[]> {
   return sanityClient.fetch(
     `*[_type == "offer" && active == true] | order(order asc){
-      _id, title, description, originalPrice, discountedPrice, image, badge, active, order
+      _id, title, description, originalPrice, discountedPrice, image, badge, active, order, startDate, endDate
     }`
   );
 }
@@ -59,6 +59,14 @@ export async function getServices(): Promise<Service[]> {
   return sanityClient.fetch(
     `*[_type == "service"] | order(order asc){
       _id, title, description, icon, order
+    }`
+  );
+}
+
+export async function getFlyers(): Promise<Flyer[]> {
+  return sanityClient.fetch(
+    `*[_type == "flyer" && active == true] | order(order asc){
+      _id, title, image, startDate, endDate, active, order
     }`
   );
 }

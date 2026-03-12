@@ -12,14 +12,14 @@ export default function ContactSection() {
         />
         <div className="contact-grid">
           <a
-            href="https://wa.me/393271262504"
+            href="https://wa.me/390292140862"
             className="contact-card whatsapp-primary"
             target="_blank"
             rel="noopener noreferrer"
           >
             <i aria-hidden="true">💬</i>
             <h3>WhatsApp</h3>
-            <p>327 126 2504<br /><strong>Risposta rapida</strong></p>
+            <p>02 9214 0862<br /><strong>Risposta rapida</strong></p>
           </a>
           <a href="tel:+390292140862" className="contact-card">
             <i aria-hidden="true">📞</i>
@@ -36,10 +36,10 @@ export default function ContactSection() {
             <h3>Indirizzo</h3>
             <p>Via Mozart, 41<br />20096 Pioltello (MI)</p>
           </a>
-          <a href="mailto:farmamozart@gmail.com" className="contact-card">
+          <a href="mailto:farmaciamozart@gmail.com" className="contact-card">
             <i aria-hidden="true">✉️</i>
             <h3>Email</h3>
-            <p>farmamozart@gmail.com</p>
+            <p>farmaciamozart@gmail.com</p>
           </a>
         </div>
         <p className="contact-hint">

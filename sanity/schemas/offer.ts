@@ -13,6 +13,8 @@ const offer = {
     { name: 'discountedPrice', title: 'Prezzo Offerta (€)', type: 'number', validation: (Rule: any) => Rule.min(0) },
     { name: 'image', title: 'Immagine', type: 'image', options: { hotspot: true }, fields: [{ name: 'alt', type: 'string', title: 'Testo alternativo' }] },
     { name: 'badge', title: 'Badge (es. -30%)', type: 'string', validation: (Rule: any) => Rule.max(20) },
+    { name: 'startDate', title: 'Data Inizio Offerta', type: 'date', description: 'Se impostata, l\'offerta sarà visibile come "Prossimamente" fino a questa data.' },
+    { name: 'endDate', title: 'Data Fine Offerta', type: 'date', description: 'L\'offerta scadrà automaticamente dopo questa data.' },
     { name: 'active', title: 'Attiva', type: 'boolean', initialValue: true },
     { name: 'order', title: 'Ordine', type: 'number', initialValue: 0 },
   ],

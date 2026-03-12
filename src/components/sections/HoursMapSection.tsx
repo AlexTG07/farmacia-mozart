@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import SectionHeader from '../ui/SectionHeader';
 
 const HOURS = [
@@ -10,12 +13,12 @@ const HOURS = [
   { day: 'Domenica', time: '9:00 – 20:00', id: 0 },
 ];
 
-function getTodayId(): number {
-  return new Date().getDay();
-}
-
 export default function HoursMapSection() {
-  const todayId = getTodayId();
+  const [todayId, setTodayId] = useState<number | null>(null);
+
+  useEffect(() => {
+    setTodayId(new Date().getDay());
+  }, []);
 
   return (
     <section id="orari">

@@ -50,7 +50,7 @@ export default function CookiePolicyPage() {
         <h2 style={{ marginTop: 32 }}>6. Contatti</h2>
         <p style={{ marginTop: 8, lineHeight: 1.8 }}>
           Per domande sulla nostra Cookie Policy, contattaci a{' '}
-          <a href="mailto:farmamozart@gmail.com">farmamozart@gmail.com</a>.
+          <a href="mailto:farmaciamozart@gmail.com">farmaciamozart@gmail.com</a>.
         </p>
       </div>
     </section>

@@ -7,10 +7,10 @@ import { TopBar } from '@/components/layout';
 import { Header } from '@/components/layout';
 import { Footer } from '@/components/layout';
 import { CookieBanner } from '@/components/layout';
-import { WhatsAppFloat, ScrollToTop } from '@/components/ui';
+import { WhatsAppFloat, ScrollToTop, FloatingActions, ScrollReveal } from '@/components/ui';
 import GoogleTranslateInit from '@/components/GoogleTranslateInit';
 import JsonLd from '@/components/seo/JsonLd';
-import { getOffers, getProducts } from '@/lib/sanity/queries';
+import { getOffers, getProducts, getFlyers } from '@/lib/sanity/queries';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -50,6 +50,13 @@ export const metadata: Metadata = {
   publisher: 'Farmacia Mozart',
   alternates: {
     canonical: '/',
+  },
+  icons: {
+    icon: '/img/logo.png',
+    apple: '/img/logo.png',
+  },
+  other: {
+    'theme-color': '#00875a',
   },
   openGraph: {
     title: 'Farmacia Mozart | Farmacia a Pioltello',
@@ -95,9 +102,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [offers, products] = await Promise.all([
+  const [offers, products, flyers] = await Promise.all([
     getOffers().catch(() => []),
     getProducts().catch(() => []),
+    getFlyers().catch(() => []),
   ]);
 
   return (
@@ -110,11 +118,12 @@ export default async function RootLayout({
           Vai al contenuto principale
         </a>
         <TopBar />
-        <Header hasOffers={offers.length > 0} hasProducts={products.length > 0} />
+        <Header hasOffers={offers.length > 0} hasProducts={products.length > 0} hasFlyers={flyers.length > 0} />
         <main id="main">{children}</main>
         <Footer />
-        <WhatsAppFloat />
+        <FloatingActions />
         <ScrollToTop />
+        <ScrollReveal />
         <CookieBanner />
         <GoogleTranslateInit />
         <Analytics />
