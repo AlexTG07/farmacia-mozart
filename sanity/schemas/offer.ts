@@ -7,17 +7,28 @@ const offer = {
   title: 'Offerte',
   type: 'document',
   fields: [
-    { name: 'title', title: 'Nome Prodotto', type: 'string', validation: (Rule: any) => Rule.required().max(200) },
-    { name: 'description', title: 'Descrizione', type: 'text', validation: (Rule: any) => Rule.max(500) },
-    { name: 'originalPrice', title: 'Prezzo Originale (€)', type: 'number', validation: (Rule: any) => Rule.min(0) },
-    { name: 'discountedPrice', title: 'Prezzo Offerta (€)', type: 'number', validation: (Rule: any) => Rule.min(0) },
-    { name: 'image', title: 'Immagine', type: 'image', options: { hotspot: true }, fields: [{ name: 'alt', type: 'string', title: 'Testo alternativo' }] },
+    { name: 'product', title: 'Prodotto', type: 'reference', to: [{ type: 'product' }], validation: (Rule: any) => Rule.required() },
+    { name: 'discountedPrice', title: 'Prezzo Offerta (€)', type: 'number', validation: (Rule: any) => Rule.required().min(0) },
     { name: 'badge', title: 'Badge (es. -30%)', type: 'string', validation: (Rule: any) => Rule.max(20) },
     { name: 'startDate', title: 'Data Inizio Offerta', type: 'date', description: 'Se impostata, l\'offerta sarà visibile come "Prossimamente" fino a questa data.' },
     { name: 'endDate', title: 'Data Fine Offerta', type: 'date', description: 'L\'offerta scadrà automaticamente dopo questa data.' },
     { name: 'active', title: 'Attiva', type: 'boolean', initialValue: true },
     { name: 'order', title: 'Ordine', type: 'number', initialValue: 0 },
   ],
+  preview: {
+    select: {
+      title: 'product.name',
+      subtitle: 'discountedPrice',
+      media: 'product.image',
+    },
+    prepare({ title, subtitle, media }: any) {
+      return {
+        title: title || 'Prodotto non selezionato',
+        subtitle: subtitle ? `€${subtitle}` : '',
+        media,
+      };
+    },
+  },
   orderings: [{ title: 'Ordine', name: 'order', by: [{ field: 'order', direction: 'asc' }] }],
 };
 

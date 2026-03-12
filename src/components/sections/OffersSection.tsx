@@ -88,18 +88,26 @@ export default function OffersSection({ offers = [] }: OffersSectionProps) {
   const groups = groupOffersByDate(visibleOffers);
 
   function resolveOffer(offer: Offer) {
-    let { originalPrice, discountedPrice, badge } = offer;
+    // Prendi dati dal prodotto referenziato, con fallback ai vecchi campi diretti
+    const originalPrice = offer.product?.price ?? offer.originalPrice;
+    let { discountedPrice, badge } = offer;
     const pct = badge ? parseFloat(badge.replace(/[^0-9.]/g, '')) : null;
 
     if (originalPrice && discountedPrice) {
       if (!badge) badge = `-${Math.round((1 - discountedPrice / originalPrice) * 100)}%`;
     } else if (originalPrice && pct && !discountedPrice) {
       discountedPrice = Math.round(originalPrice * (1 - pct / 100) * 100) / 100;
-    } else if (discountedPrice && pct && !originalPrice) {
-      originalPrice = Math.round(discountedPrice / (1 - pct / 100) * 100) / 100;
     }
 
     return { originalPrice, discountedPrice, badge };
+  }
+
+  /** Risolve nome, descrizione e immagine con fallback ai vecchi campi */
+  function resolveOfferDisplay(offer: Offer) {
+    const name = offer.product?.name ?? offer.title ?? '';
+    const description = offer.product?.description ?? offer.description;
+    const image = offer.product?.image ?? offer.offerImage;
+    return { name, description, image };
   }
 
   return (
@@ -128,6 +136,7 @@ export default function OffersSection({ offers = [] }: OffersSectionProps) {
               <div className="offers-grid">
                 {group.offers.map(offer => {
                   const { originalPrice, discountedPrice, badge } = resolveOffer(offer);
+                  const { name, description, image } = resolveOfferDisplay(offer);
                   const isUpcoming = isUpcomingGroup;
 
                   return (
@@ -148,10 +157,10 @@ export default function OffersSection({ offers = [] }: OffersSectionProps) {
                         </div>
                       ) : null}
                       <div className="offer-img">
-                        {offer.image?.asset ? (
+                        {image?.asset ? (
                           <img
-                            src={urlFor(offer.image).width(400).height(300).fit('crop').url()}
-                            alt={offer.image.alt || offer.title}
+                            src={urlFor(image).width(400).height(300).fit('crop').url()}
+                            alt={image.alt || name}
                             width={400}
                             height={300}
                             loading="lazy"
@@ -161,15 +170,17 @@ export default function OffersSection({ offers = [] }: OffersSectionProps) {
                         )}
                       </div>
                       <div className="offer-body">
-                        <h3>{sanitizeText(offer.title)}</h3>
-                        {offer.description && (
-                          <p className="offer-desc">{sanitizeText(offer.description)}</p>
+                        <h3>{sanitizeText(name)}</h3>
+                        {description && (
+                          <p className="offer-desc">{sanitizeText(description)}</p>
                         )}
                         {isUpcoming ? (
                           <div className="offer-prices">
-                            <span className="offer-upcoming-label">
-                              Disponibile dal {formatDateShort(offer.startDate!)}
-                            </span>
+                            {offer.startDate && (
+                              <span className="offer-upcoming-label">
+                                Disponibile dal {formatDateShort(offer.startDate)}
+                              </span>
+                            )}
                           </div>
                         ) : (
                           <div className="offer-prices">

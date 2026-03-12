@@ -1,4 +1,4 @@
-type BadgeVariant = 'open' | 'closed' | 'offer';
+type BadgeVariant = 'open' | 'closed' | 'offer' | 'prescription';
 
 interface BadgeProps {
   variant: BadgeVariant;

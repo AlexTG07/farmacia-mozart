@@ -12,7 +12,8 @@ const product = {
     { name: 'price', title: 'Prezzo (€)', type: 'number', validation: (Rule: any) => Rule.required().min(0) },
     { name: 'category', title: 'Categoria', type: 'reference', to: [{ type: 'category' }], validation: (Rule: any) => Rule.required() },
     { name: 'image', title: 'Immagine', type: 'image', options: { hotspot: true }, fields: [{ name: 'alt', type: 'string', title: 'Testo alternativo' }] },
-    { name: 'active', title: 'Attivo', type: 'boolean', initialValue: true },
+    { name: 'requiresPrescription', title: 'Richiede Ricetta Medica', type: 'boolean', initialValue: false },
+    { name: 'active', title: 'Visibile sul Sito', type: 'boolean', initialValue: true },
     { name: 'order', title: 'Ordine', type: 'number', initialValue: 0 },
   ],
 };

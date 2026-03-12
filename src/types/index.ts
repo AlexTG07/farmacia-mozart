@@ -29,11 +29,18 @@ export interface SocialLink {
 
 export interface Offer {
   _id: string;
-  title: string;
+  product?: {
+    name: string;
+    description?: string;
+    price: number;
+    image?: SanityImage;
+  };
+  // Fallback per offerte vecchie senza riferimento prodotto
+  title?: string;
   description?: string;
   originalPrice?: number;
-  discountedPrice?: number;
-  image?: SanityImage;
+  offerImage?: SanityImage;
+  discountedPrice: number;
   badge?: string;
   active: boolean;
   order?: number;
@@ -51,6 +58,7 @@ export interface Product {
   image?: SanityImage;
   active?: boolean;
   order?: number;
+  requiresPrescription?: boolean;
 }
 
 export interface Category {
