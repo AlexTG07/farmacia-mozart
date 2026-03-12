@@ -4,7 +4,6 @@ export { default as SectionHeader } from './SectionHeader';
 export { default as Accordion } from './Accordion';
 export { default as FilterChip } from './FilterChip';
 export { default as ReviewCard } from './ReviewCard';
-export { default as WhatsAppFloat } from './WhatsAppFloat';
 export { default as FloatingActions } from './FloatingActions';
 export { default as ScrollToTop } from './ScrollToTop';
 export { default as ScrollReveal } from './ScrollReveal';

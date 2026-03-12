@@ -13,15 +13,13 @@ import {
   VolantiniSection,
 } from '@/components/sections';
 import { getOffers, getProducts, getCategories, getFlyers } from '@/lib/sanity/queries';
-import { getGoogleReviews } from '@/lib/google-reviews';
 
 export default async function Home() {
-  const [offers, products, categories, flyers, googleReviews] = await Promise.all([
+  const [offers, products, categories, flyers] = await Promise.all([
     getOffers().catch(() => []),
     getProducts().catch(() => []),
     getCategories().catch(() => []),
     getFlyers().catch(() => []),
-    getGoogleReviews(),
   ]);
 
   // Map Sanity category reference to flat categorySlug for filtering
@@ -32,7 +30,7 @@ export default async function Home() {
 
   return (
     <>
-      <HeroSection rating={googleReviews.rating} totalReviews={googleReviews.totalReviews} />
+      <HeroSection rating={4.7} totalReviews={164} />
       <ServicesGrid />
       <ParallaxDivider
         alt="Farmacia Mozart"
@@ -50,7 +48,7 @@ export default async function Home() {
         variant="azure"
       />
       <FAQSection />
-      <ReviewsSection rating={googleReviews.rating} totalReviews={googleReviews.totalReviews} />
+      <ReviewsSection rating={4.7} totalReviews={164} />
       <HoursMapSection />
       <ContactSection />
     </>

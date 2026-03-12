@@ -11,7 +11,7 @@ const siteSettings = {
     { name: 'heroSubtitle', title: 'Sottotitolo Hero', type: 'text', initialValue: 'Farmacia Mozart: aperta ogni giorno dell\'anno con servizi diagnostici avanzati, consulenza personalizzata e consegna a domicilio.' },
     { name: 'phone', title: 'Telefono', type: 'string', initialValue: '02 9214 0862' },
     { name: 'whatsapp', title: 'WhatsApp (con prefisso)', type: 'string', initialValue: '390292140862' },
-    { name: 'email', title: 'Email', type: 'string', initialValue: 'farmamozart@gmail.com' },
+    { name: 'email', title: 'Email', type: 'string', initialValue: 'farmaciamozart@gmail.com' },
     { name: 'address', title: 'Indirizzo', type: 'string', initialValue: 'Via Mozart 41, Pioltello (MI)' },
     {
       name: 'mapEmbedUrl',

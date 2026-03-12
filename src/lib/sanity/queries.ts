@@ -3,23 +3,7 @@
 // ============================================
 
 import { sanityClient } from './client';
-import type { Offer, Product, Category, FAQ, Service, SiteSettings, Flyer } from '@/types';
-
-export async function getSiteSettings(): Promise<SiteSettings> {
-  return sanityClient.fetch(
-    `*[_type == "siteSettings"][0]{
-      heroTitle,
-      heroSubtitle,
-      phone,
-      whatsapp,
-      email,
-      address,
-      mapEmbedUrl,
-      openingHours[]{day, dayIndex, open, close},
-      socialLinks[]{platform, url, icon}
-    }`
-  );
-}
+import type { Offer, Product, Category, Flyer } from '@/types';
 
 export async function getOffers(): Promise<Offer[]> {
   return sanityClient.fetch(
@@ -43,22 +27,6 @@ export async function getCategories(): Promise<Category[]> {
   return sanityClient.fetch(
     `*[_type == "category"] | order(name asc){
       _id, name, slug, icon
-    }`
-  );
-}
-
-export async function getFaqs(): Promise<FAQ[]> {
-  return sanityClient.fetch(
-    `*[_type == "faq"] | order(order asc){
-      _id, question, answer, order
-    }`
-  );
-}
-
-export async function getServices(): Promise<Service[]> {
-  return sanityClient.fetch(
-    `*[_type == "service"] | order(order asc){
-      _id, title, description, icon, order
     }`
   );
 }

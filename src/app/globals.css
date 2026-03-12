@@ -1299,30 +1299,6 @@ section {
 @media (min-width: 640px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
 
-/* ─── WhatsApp Floating ─── */
-.whatsapp-float {
-  position: fixed;
-  bottom: var(--space-6);
-  right: var(--space-6);
-  z-index: var(--z-banner);
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #25d366;
-  color: var(--text-inverse);
-  border-radius: 50%;
-  font-size: 1.6rem;
-  box-shadow: 0 4px 20px rgba(37,211,102,.4);
-  animation: float-bounce 3s ease-in-out infinite;
-  transition: transform var(--transition);
-}
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  color: var(--text-inverse);
-}
-
 /* ─── Scroll to Top ─── */
 .scroll-top {
   position: fixed;
@@ -1831,9 +1807,6 @@ body { top: 0 !important; }
 .float-btn:hover .float-tooltip {
   opacity: 1;
 }
-
-/* Hide old WhatsApp float when FloatingActions is used */
-.whatsapp-float { display: none; }
 
 @media (max-width: 767px) {
   .floating-actions {

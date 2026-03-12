@@ -7,7 +7,7 @@ import { TopBar } from '@/components/layout';
 import { Header } from '@/components/layout';
 import { Footer } from '@/components/layout';
 import { CookieBanner } from '@/components/layout';
-import { WhatsAppFloat, ScrollToTop, FloatingActions, ScrollReveal } from '@/components/ui';
+import { ScrollToTop, FloatingActions, ScrollReveal } from '@/components/ui';
 import GoogleTranslateInit from '@/components/GoogleTranslateInit';
 import JsonLd from '@/components/seo/JsonLd';
 import { getOffers, getProducts, getFlyers } from '@/lib/sanity/queries';
@@ -91,9 +91,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'INSERISCI_QUI_IL_CODICE_GOOGLE_SEARCH_CONSOLE',
-  },
+
   category: 'health',
 };
 
