@@ -23,6 +23,7 @@ function normalize(str: string): string {
 interface CatalogSectionProps {
   products?: Product[];
   categories?: Category[];
+  offers?: Offer[];
 }
 
 export default function CatalogSection({ products = [], categories = [] }: CatalogSectionProps) {
@@ -104,38 +105,59 @@ export default function CatalogSection({ products = [], categories = [] }: Catal
         </div>
         <div className="catalog-grid">
           {filtered.length > 0 ? (
-            filtered.map(product => (
-              <div className="product-card" key={product._id}>
-                {product.requiresPrescription && (
-                  <div className="product-badge">
-                    <Badge variant="prescription">🩺 Ricetta</Badge>
+            filtered.map(product => {
+              // Cerca offerta attiva collegata (match per id prodotto)
+              const offer = offers?.find(o => o.product && o.product.name === product.name);
+              const hasOffer = !!offer;
+              const price = hasOffer ? offer.discountedPrice : product.price;
+              const badge = hasOffer ? offer.badge : undefined;
+              return (
+                <div className="product-card" key={product._id}>
+                  {product.requiresPrescription && (
+                    <div className="product-badge">
+                      <Badge variant="prescription">🩺 Ricetta</Badge>
+                    </div>
+                  )}
+                  {hasOffer && (
+                    <div className="product-badge" style={{ top: '36px', right: '12px' }}>
+                      <Badge variant="offer">{badge ?? 'Offerta'}</Badge>
+                    </div>
+                  )}
+                  <div className="product-img">
+                    {product.image?.asset ? (
+                      <img
+                        src={urlFor(product.image).width(300).height(300).fit('crop').url()}
+                        alt={product.image.alt || product.name}
+                        width={300}
+                        height={300}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <span aria-hidden="true" style={{ fontSize: '3rem' }}>📦</span>
+                    )}
                   </div>
-                )}
-                <div className="product-img">
-                  {product.image?.asset ? (
-                    <img
-                      src={urlFor(product.image).width(300).height(300).fit('crop').url()}
-                      alt={product.image.alt || product.name}
-                      width={300}
-                      height={300}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <span aria-hidden="true" style={{ fontSize: '3rem' }}>📦</span>
-                  )}
+                  <div className="product-body">
+                    {product.category?.name && (
+                      <div className="product-category">{sanitizeText(product.category.name)}</div>
+                    )}
+                    <h3>{sanitizeText(product.name)}</h3>
+                    {product.description && (
+                      <p className="product-desc">{sanitizeText(product.description)}</p>
+                    )}
+                    <div className="product-price">
+                      {hasOffer ? (
+                        <>
+                          <span className="offer-price-old">€{sanitizePrice(product.price)}</span>
+                          <span className="offer-price-new">€{sanitizePrice(price)}</span>
+                        </>
+                      ) : (
+                        <>€{sanitizePrice(product.price)}</>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="product-body">
-                  {product.category?.name && (
-                    <div className="product-category">{sanitizeText(product.category.name)}</div>
-                  )}
-                  <h3>{sanitizeText(product.name)}</h3>
-                  {product.description && (
-                    <p className="product-desc">{sanitizeText(product.description)}</p>
-                  )}
-                  <div className="product-price">€{sanitizePrice(product.price)}</div>
-                </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <div className="empty-state">
               <p>Nessun prodotto trovato{search ? ` per "${sanitizeText(search)}"` : ' in questa categoria'}.</p>

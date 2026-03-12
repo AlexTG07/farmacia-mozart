@@ -23,10 +23,19 @@ export default async function Home() {
   ]);
 
   // Map Sanity category reference to flat categorySlug for filtering
+  // Fallback: se manca la categoria, imposta categorySlug a ''
   const mappedProducts = products.map(p => ({
     ...p,
     categorySlug: p.category?.slug ?? p.categorySlug ?? '',
   }));
+
+  // Filtra solo offerte attive (non scadute, non upcoming)
+  const today = new Date().toISOString().split('T')[0];
+  const activeOffers = offers.filter(o => {
+    if (o.endDate && o.endDate < today) return false;
+    if (o.startDate && o.startDate > today) return false;
+    return true;
+  });
 
   return (
     <>
@@ -39,7 +48,7 @@ export default async function Home() {
       />
       <OffersSection offers={offers} />
       <VolantiniSection flyers={flyers} />
-      <CatalogSection products={mappedProducts} categories={categories} />
+      <CatalogSection products={mappedProducts} categories={categories} offers={activeOffers} />
       <GallerySection />
       <WhyUsSection />
       <ParallaxDivider
