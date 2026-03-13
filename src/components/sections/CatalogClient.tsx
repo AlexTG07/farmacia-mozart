@@ -70,13 +70,15 @@ export default function CatalogClient({ products, categories, offers }: CatalogC
 
   return (
     <>
+      {/* Debug: logga quanti prodotti vengono renderizzati */}
+      {console.log('Prodotti renderizzati:', paginatedProducts.length, paginatedProducts.map(p => p.name))}
       {/* Barra di ricerca */}
       <div className="catalog-search">
-        <span className="catalog-search-icon" aria-hidden="true">🔍</span>
         <input
           type="search"
           className="catalog-search-input"
           placeholder="Cerca un prodotto..."
+          style={{ padding: '10px' }}
           value={search}
           onChange={e =>
             updateParams({ cerca: e.target.value || null, pagina: null })
@@ -134,17 +136,19 @@ export default function CatalogClient({ products, categories, offers }: CatalogC
 
       {/* Griglia prodotti */}
       <div className="catalog-grid">
+        {/* Debug: mostra il numero di prodotti e un messaggio se la lista è vuota */}
         {paginatedProducts.length > 0 ? (
           paginatedProducts.map(product => {
+            // ...existing code...
             const offer = offers.find(
               o => o.product && o.product.name === product.name
             );
             const hasOffer = !!offer;
             const price = hasOffer ? offer!.discountedPrice : product.price;
             const badge = hasOffer ? offer!.badge : undefined;
-
             return (
-              <div className="product-card" key={product._id}>
+              <div className="product-card visible" key={product._id}>
+                {/* ...existing code... */}
                 {product.requiresPrescription && (
                   <div className="product-badge">
                     <Badge variant="prescription">🩺 Ricetta</Badge>
@@ -209,7 +213,7 @@ export default function CatalogClient({ products, categories, offers }: CatalogC
           })
         ) : (
           <div className="empty-state">
-            <p>Nessun prodotto trovato.</p>
+            <p>Nessun prodotto trovato. ({paginatedProducts.length})</p>
           </div>
         )}
       </div>
