@@ -1,4 +1,4 @@
-export const revalidate = 60;
+export const revalidate = 30;
 
 import {
   HeroSection,
@@ -26,10 +26,14 @@ export default async function Home() {
 
   // Map Sanity category reference to flat categorySlug for filtering
   // Fallback: se manca la categoria, imposta categorySlug a ''
-  const mappedProducts = products.map(p => ({
-    ...p,
-    categorySlug: p.category?.slug ?? p.categorySlug ?? '',
-  }));
+  const mappedProducts = products.map(p => {
+    // Debug: logga categoria e slug
+    console.log('Prodotto:', p.name, 'Categoria:', p.category?.name, 'Slug:', p.category?.slug, 'categorySlug:', p.categorySlug);
+    return {
+      ...p,
+      categorySlug: typeof p.category?.slug === 'string' ? p.category.slug : (typeof p.categorySlug === 'string' ? p.categorySlug : ''),
+    };
+  });
 
   // Filtra solo offerte attive (non scadute, non upcoming)
   const today = new Date().toISOString().split('T')[0];
