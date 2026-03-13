@@ -1020,6 +1020,79 @@ section {
   color: var(--gray-800);
 }
 
+/* Prodotti per pagina */
+.catalog-per-page {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+.catalog-per-page-label {
+  font-size: .8rem;
+  color: var(--text-muted);
+  margin-right: var(--space-1);
+}
+.catalog-per-page-btn {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: .8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.catalog-per-page-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.catalog-per-page-btn.active {
+  background: var(--primary);
+  color: var(--text-inverse);
+  border-color: var(--primary);
+}
+
+/* Paginazione */
+.catalog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+  flex-wrap: wrap;
+}
+.catalog-pagination-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-xs);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: .9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.catalog-pagination-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.catalog-pagination-btn.active {
+  background: var(--primary);
+  color: var(--text-inverse);
+  border-color: var(--primary);
+}
+.catalog-pagination-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
 /* Catalog responsive — flexbox auto-wraps, max-width limits card size */
 
 /* ─── Why Us ─── */
