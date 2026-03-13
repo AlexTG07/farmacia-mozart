@@ -45,11 +45,6 @@ export default function CatalogClient({ products, categories, offers }: CatalogC
   );
 
   const filteredProducts = useMemo(() => {
-    // Debug: logga i filtri e i prodotti
-    console.log('Filtro categoria:', category);
-    products.forEach(p => {
-      console.log('Prodotto:', p.name, 'Slug:', p.categorySlug, 'Categoria:', p.category?.slug);
-    });
     return products.filter(p => {
       const matchesSearch =
         !search || p.name.toLowerCase().includes(search.toLowerCase());
